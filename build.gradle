@@ -8,8 +8,8 @@ plugins {
 group = 'org.cargo'
 version = '1.0-SNAPSHOT'
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 12
+targetCompatibility = 12
 
 repositories {
     jcenter()
