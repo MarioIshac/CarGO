@@ -2,7 +2,6 @@ package me.theeninja.cargo.account;
 
 import lombok.Getter;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
@@ -34,7 +33,7 @@ public class AccountSignUpInformation {
 
     @NotNull
     @NotEmpty
-    private Set<AccountRole> accountRoles;
+    private Set<CarUserRole> carUserRoles;
 
     @NotNull
     @NotEmpty

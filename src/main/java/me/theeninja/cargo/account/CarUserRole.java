@@ -1,6 +1,6 @@
 package me.theeninja.cargo.account;
 
-public enum AccountRole {
+public enum CarUserRole {
     RENTER,
     DRIVER
 }

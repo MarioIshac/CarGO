@@ -2,7 +2,7 @@ package me.theeninja.cargo;
 
 import lombok.Getter;
 import lombok.val;
-import me.theeninja.cargo.account.AccountService;
+import me.theeninja.cargo.account.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,12 +14,12 @@ import java.util.UUID;
 @Getter
 @Component
 public class OnRegistrationCompleteEventListener implements ApplicationListener<OnRegistrationCompleteEvent> {
-    private final AccountService accountService;
+    private final UserService userService;
     private final JavaMailSender javaMailSender;
 
     @Autowired
-    public OnRegistrationCompleteEventListener(AccountService accountService, JavaMailSender javaMailSender) {
-        this.accountService = accountService;
+    public OnRegistrationCompleteEventListener(UserService userService, JavaMailSender javaMailSender) {
+        this.userService = userService;
         this.javaMailSender = javaMailSender;
     }
 
@@ -30,11 +30,11 @@ public class OnRegistrationCompleteEventListener implements ApplicationListener<
         val account = onRegistrationCompleteEvent.getAccount();
         val verificationTokenString = UUID.randomUUID().toString();
 
-        getAccountService().newVerificationToken(account, verificationTokenString);
+        this.getUserService().newVerificationToken(account, verificationTokenString);
 
         val configmrationURL = onRegistrationCompleteEvent.getAppURL() + "verify?token=" + verificationTokenString;
 
-        val recipientEmailAddress = account.getEmailAddress();
+        val recipientEmailAddress = ""; // TODO
 
         val recipientEmailMessage = new SimpleMailMessage();
 

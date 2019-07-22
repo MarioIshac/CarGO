@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface AccountRepository extends CrudRepository<Account, Long> {
-    Optional<Account> findAccountByHashedSocialSecurityNumber(String hashedSocialSecurityNumber);
-    Optional<Account> findAccountByEmailAddress(String emailAddress);
-    Optional<Account> findAccountByPhoneNumber(String phoneNumber);
+    Optional<Account> findBySocialSecurityNumber(String socialSecurityNumber);
+    Optional<Account> findByEmailAddress(String emailAddress);
+    Optional<Account> findByPhoneNumber(String phoneNumber);
 }
