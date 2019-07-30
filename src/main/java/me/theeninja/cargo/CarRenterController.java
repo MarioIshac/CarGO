@@ -49,8 +49,6 @@ public class CarRenterController {
         val vehicleIDsData = vehicleIDsResponse.getData();
         val vehicleIDs = vehicleIDsData.getVehicleIds();
 
-        return Arrays.stream(vehicleIDs)
-                     .map(vehicleID -> new Vehicle(vehicleID, accessToken))
-                     .collect(Collectors.toUnmodifiableList());
+        return Arrays.stream(vehicleIDs).map(vehicleID -> new Vehicle(vehicleID, accessToken)).collect(Collectors.toUnmodifiableSet());
     }
 }

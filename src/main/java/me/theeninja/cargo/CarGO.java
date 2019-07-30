@@ -16,22 +16,4 @@ public class CarGO {
     public static void main(final String[] args) {
         SpringApplication.run(CarGO.class, args);
     }
-
-    @Bean
-    public JavaMailSender getJavaMailSender() {
-        val mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
-
-        mailSender.setUsername("marshac.official@gmail.com");
-        mailSender.setPassword("moriMARSHACOFFICIAL1");
-
-        val props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "true");
-
-        return mailSender;
-    }
 }

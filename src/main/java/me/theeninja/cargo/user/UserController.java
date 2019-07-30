@@ -1,9 +1,11 @@
-package me.theeninja.cargo.account;
+package me.theeninja.cargo.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.val;
 import me.theeninja.cargo.VerificationToken;
 import me.theeninja.cargo.VerificationTokenNotFoundException;
+import me.theeninja.cargo.user.enduser.EndUserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,27 +16,15 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
 @Getter
-public class UserController<U extends User, V extends VerificationToken<U>> {
-    private final UserService<U, V> userService;
-
-    @Autowired
-    public UserController(UserService<U, V> userService) {
-        this.userService = userService;
-    }
-
-    @PostMapping("/register")
-    public void attemptAccountRegistration(final @ModelAttribute("accountSignUpInformation") AccountSignUpInformation accountSignUpInformation) {
-        try {
-            getUserService().registerUserAccount(accountSignUpInformation);
-        } catch (UserCredentialExistsException e) {
-            e.printStackTrace();
-        }
-    }
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+@RestController
+public class UserController<U extends User> {
+    private final UserService<U> userService;
 
     @PostMapping("/verify")
     public void attemptAccountVerification(final @RequestParam("tokenString") String verificationTokenString) {
         try {
-            val verificationToken = this.getUserService().getVerificationToken(verificationTokenString);
+            val verificationToken = getUserService().getVerificationToken(verificationTokenString);
 
             val user = verificationToken.getVerificationRequester();
 

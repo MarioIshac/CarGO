@@ -1,13 +1,15 @@
 package me.theeninja.cargo;
 
 import lombok.Data;
+import lombok.val;
+import me.theeninja.cargo.user.User;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
-@MappedSuperclass
 @Data
-public abstract class VerificationToken<U> {
+public class VerificationToken {
     private static final int EXPIRATION = 60 * 24;
 
     @Id
@@ -18,9 +20,14 @@ public abstract class VerificationToken<U> {
 
     @OneToOne
     @JoinColumn
-    private U verificationRequester;
+    private User verificationRequester;
 
     private Instant verificationRequestInstant;
 
-    public abstract boolean isExpired();
+    public boolean isExpired() {
+        val currentInstant = Instant.now();
+        val instantOfExpiration = getVerificationRequestInstant().plus(1, ChronoUnit.DAYS);
+
+        return currentInstant.isBefore(instantOfExpiration);
+    }
 }

@@ -1,9 +1,9 @@
 package me.theeninja.cargo;
 
-import me.theeninja.cargo.account.UserCredentialExistsException;
+import me.theeninja.cargo.user.UserCredentialExistsException;
 
 public class PhoneNumberExistsException extends UserCredentialExistsException {
-    public PhoneNumberExistsException(String message) {
-        super(message);
+    public PhoneNumberExistsException(final String credentialName, final Object credentialValue) {
+        super(credentialName, credentialValue);
     }
 }

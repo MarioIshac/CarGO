@@ -1,23 +1,24 @@
-package me.theeninja.cargo.account;
+package me.theeninja.cargo.user.enduser;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import me.theeninja.cargo.user.EndUserRole;
+import me.theeninja.cargo.user.User;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Entity
-public class Account extends User {
+public class EndUser extends User {
     private String phoneNumber;
 
     private byte[] driversLicenseImage;
     private byte[] insuranceCardImage;
 
     @ElementCollection
-    private Set<CarUserRole> carUserRoles;
+    private Set<EndUserRole> endUserRoles;
 
     private String socialSecurityNumber;
 

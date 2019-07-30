@@ -1,4 +1,4 @@
-package me.theeninja.cargo.account;
+package me.theeninja.cargo.user;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
